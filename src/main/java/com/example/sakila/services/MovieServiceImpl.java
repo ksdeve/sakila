@@ -42,5 +42,10 @@ public class MovieServiceImpl  implements MovieService {
 
 
 
+    // Implémentation pour rechercher des films par titre
+    @Override
+    public List<Movie> searchMoviesByTitle(String title) {
+        return repository.findByTitleContainingIgnoreCase(title);
+    }
 }
 

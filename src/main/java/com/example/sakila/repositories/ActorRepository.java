@@ -6,5 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface ActorRepository extends JpaRepository<Actor, Integer> {
-    List<Actor> findByActorContainingIgnoreCase(String expression);
+    List<Actor> findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(String first, String last);
+
 }

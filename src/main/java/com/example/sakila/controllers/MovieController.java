@@ -5,6 +5,7 @@ import com.example.sakila.services.MovieService;
 import jakarta.transaction.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -23,5 +24,13 @@ public class MovieController
     @Transactional
     public List<Movie> getAllMovies() {
         return service.readAll();
+    }
+
+
+    // Endpoint pour rechercher un film par titre
+    @GetMapping("/search")
+    @Transactional
+    public List<Movie> searchMoviesByTitle(@RequestParam String title) {
+        return service.searchMoviesByTitle(title);
     }
 }

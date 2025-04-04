@@ -15,8 +15,8 @@ public class ActorServiceImpl implements ActorService {
     }
 
     @Override
-    public List<Actor> findByExpression(String expression) {
-        return repository.findByActorContainingIgnoreCase(expression);
+    public List<Actor> findByExpression(String keyword) {
+        return repository.findByFirstNameContainingIgnoreCaseOrLastNameContainingIgnoreCase(keyword, keyword);
     }
 
     @Override
