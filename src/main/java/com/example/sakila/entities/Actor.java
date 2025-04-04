@@ -1,5 +1,6 @@
 package com.example.sakila.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
@@ -24,12 +25,13 @@ public class Actor {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "film_actor",
             joinColumns = @JoinColumn(name = "actor_id"),
             inverseJoinColumns = @JoinColumn(name = "film_id")
     )
+    @JsonIgnoreProperties(value = {"movies"})
     private Set<Movie> movies = new HashSet<>();
 
 

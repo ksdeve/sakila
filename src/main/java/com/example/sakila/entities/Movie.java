@@ -1,6 +1,8 @@
 package com.example.sakila.entities;
 
 import com.example.sakila.entities.enums.Rating;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 
 import java.math.BigDecimal;
@@ -25,12 +27,13 @@ public class Movie {
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "film_actor",
             joinColumns = @JoinColumn(name = "film_id"),
             inverseJoinColumns = @JoinColumn(name = "actor_id")
     )
+    @JsonIgnore
     private Set<Actor> actors = new HashSet<>();
 
     public Set<Actor> getActors() {

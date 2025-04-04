@@ -28,6 +28,7 @@ public class ActorController {
 
 
     @GetMapping("/{id}/movies")
+    @Transactional
     public List<Movie> getActorMovies(@PathVariable Integer id) {
         return service.getMoviesByActorId(id);
     }
