@@ -3,6 +3,8 @@ package com.example.sakila.entities;
 import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "actor")
@@ -21,6 +23,15 @@ public class Actor {
 
     @Column(name = "last_update")
     private LocalDateTime lastUpdate;
+
+    @ManyToMany
+    @JoinTable(
+            name = "film_actor",
+            joinColumns = @JoinColumn(name = "actor_id"),
+            inverseJoinColumns = @JoinColumn(name = "film_id")
+    )
+    private Set<Movie> movies = new HashSet<>();
+
 
     public Actor() {}
 
@@ -63,13 +74,22 @@ public class Actor {
         this.lastUpdate = lastUpdate;
     }
 
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(Set<Movie> movies) {
+        this.movies = movies;
+    }
+
     @Override
     public String toString() {
         return "Actor{" +
                 "id=" + id +
-                ", first_name='" + firstName + '\'' +
-                ", last_name='" + lastName + '\'' +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
                 ", lastUpdate=" + lastUpdate +
+                ", movies=" + movies +
                 '}';
     }
 }

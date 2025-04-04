@@ -1,5 +1,6 @@
 package com.example.sakila.services;
 
+import com.example.sakila.entities.Actor;
 import com.example.sakila.entities.Movie;
 import com.example.sakila.repositories.MovieRepository;
 import org.slf4j.Logger;
@@ -7,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class MovieServiceImpl  implements MovieService {
@@ -40,6 +42,10 @@ public class MovieServiceImpl  implements MovieService {
         return repository.findAll();
     }
 
+    @Override
+    public Set<Actor> getActorsByMovieId(Integer movieId) {
+        return repository.findActorsByMovieId(movieId);
+    }
 
 
     // Implémentation pour rechercher des films par titre
